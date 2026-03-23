@@ -18,7 +18,9 @@
       "Bash(cargo build:*)",
       "Bash(cargo run:*)",
       "Bash(vc-x1 chid:*)",
-      "Bash(vc-x1 finalize:*)"
+      "Bash(vc-x1 finalize:*)",
+      "Bash(cargo install:*)",
+      "Bash(ccs-viewer:*)"
     ]
   }
 }
