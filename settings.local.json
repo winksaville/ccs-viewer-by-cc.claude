@@ -20,7 +20,9 @@
       "Bash(vc-x1 chid:*)",
       "Bash(vc-x1 finalize:*)",
       "Bash(cargo install:*)",
-      "Bash(ccs-viewer:*)"
+      "Bash(ccs-viewer:*)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); v=d.get\\(''''error''''\\); print\\(type\\(v\\).__name__\\); print\\(json.dumps\\(v, indent=2\\)[:500]\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); data=d.get\\(''''data'''',{}\\); print\\(''''query:'''', type\\(data.get\\(''''query''''\\)\\).__name__, json.dumps\\(data.get\\(''''query''''\\)\\)[:200]\\)\")"
     ]
   }
 }
