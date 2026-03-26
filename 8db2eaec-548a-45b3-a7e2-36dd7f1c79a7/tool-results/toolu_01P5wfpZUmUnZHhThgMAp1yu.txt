@@ -1,0 +1,252 @@
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-16-  valid (-v) > errors (-e/-E) > skipped (-s) > zero-len (-z) > summary (always last)
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-17-
+src/main.rs-18-Summary: <total> total files, <valid> valid files with <records> records, <n> zero-len, <n> skipped, <n> errors
+src/main.rs:19:  total:    all files found by glob/recursive search
+src/main.rs-20-  valid:    files successfully processed (total minus zero-len and skipped)
+src/main.rs-21-  records:  total successfully deserialized records (in valid files)
+src/main.rs-22-  zero-len: zero-length files
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-35-
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-36-    /// Recursively search directories for matching files
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-37-    #[arg(short, long)]
+src/main.rs:38:    recursive: bool,
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-39-
+src/main.rs:40:    /// File glob pattern for recursive mode (repeatable, default: *.jsonl, agent-*.meta.json)
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-41-    #[arg(long = "glob")]
+src/main.rs-42-    globs: Vec<String>,
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-43-
+--
+src/main.rs-70-fn resolve_files(cli: &Cli) -> Vec<PathBuf> {
+src/main.rs-71-    let mut files = Vec::new();
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-72-
+src/main.rs:73:    if cli.recursive {
+src/main.rs-74-        let file_globs: Vec<&str> = if cli.globs.is_empty() {
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-75-            vec!["*.jsonl", "agent-*.meta.json"]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-76-        } else {
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-123-            // Check if pattern is a literal directory path first.
+src/main.rs-124-            let path = PathBuf::from(pattern);
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-125-            if path.is_dir() {
+src/main.rs:126:                // Directory: expand file globs inside it (non-recursive).
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-127-                for fg in &file_globs {
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-128-                    let full = format!("{}/{fg}", path.display());
+src/main.rs-129-                    match glob::glob(&full) {
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-150-                                matched.push(entry);
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-151-                            } else if entry.is_dir() {
+src/main.rs-152-                                / Glob matched a directory: expand file
+src/main.rs:153:                                // globs inside it (non-recursive).
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-154-                                for fg in &file_globs {
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/src/main.rs-155-                                    let full = format!("{}/{fg}", entry.display());
+src/main.rs-156-                                    if let Ok(inner) = glob::glob(&full) {
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-26-
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-27-| Flag | Short | Description |
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-28-|------|-------|-------------|
+README.md:29:| `--recursive` | `-r` | Treat positional args as directories, search recursively |
+README.md:30:| `--glob <PAT>` | | File pattern for recursive mode (repeatable, default: `*.jsonl`, `agent-*.meta.json`) |
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-31-| `--strict` | | Exit 2 if deserialization errors are present |
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-32-| `--version` | `-V` | Print version |
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-33-| `--help` | `-h` | Print help |
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-46-### Positional arguments
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-47-
+README.md-48-Without `-r`: file glob patterns expanded by the program.
+README.md:49:With `-r`: directory paths (or directory globs) to search recursively.
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-50-
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-51-### Examples
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-52-
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-152-
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-153-| Field | Meaning |
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-154-|-------|---------|
+README.md:155:| total | All files found by glob/recursive search |
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-156-| valid | Files successfully processed (total minus zero-len and skipped) |
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-157-| records | Total successfully deserialized records (in valid files) |
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-158-| zero-len | Zero-length files |
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-169-
+README.md-170-JSONL files are checked before processing: if the first line doesn't
+README.md-171-start with `{"type":` or `{"parentUuid":`, the file is skipped. This
+README.md:172:filters out non-Claude-Code JSONL files (benchmark logs, etc.) without
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-173-relying on filename patterns. Use `-s` to see which files were skipped.
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-174-
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/README.md-175-## jj Tips for Git Users
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-56-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-57-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-58-[Omitted long context line]
+data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl:59:[Omitted long matching line]
+data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl:60:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-61-[Omitted long context line]
+data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl:62:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-63-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-64-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-65-[Omitted long context line]
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-200-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-201-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-202-[Omitted long context line]
+data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl:203:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-204-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-205-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-206-[Omitted long context line]
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-209-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-210-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-211-[Omitted long context line]
+data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl:212:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-213-[Omitted long context line]
+data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl:214:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-215-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-216-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-217-[Omitted long context line]
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-239-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-240-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-241-[Omitted long context line]
+data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl:242:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-243-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-244-[Omitted long context line]
+data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl:245:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-246-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-247-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-248-[Omitted long context line]
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-262-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-263-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-264-[Omitted long context line]
+data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl:265:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-266-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-267-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-268-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-269-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-270-[Omitted long context line]
+data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl:271:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-272-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-273-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-274-[Omitted long context line]
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-288-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-289-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-290-[Omitted long context line]
+data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl:291:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-292-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-293-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/86fb7a89-abfa-4e84-b862-5983e93c0b3b.jsonl-294-[Omitted long context line]
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/todo.md-28- - Add all-optional-fields-seen test (0.6.0) [8]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/todo.md-29- - Compact single line output with grouped errors 0.7.0 [9]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/todo.md-30- - Add unknown fields from vc x1 sessions 0.8.0 [10]
+notes/todo.md:31: - Add cli flags list errors recursive glob 0.9.0 [11]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/todo.md-32- - Add support for agent session files [12]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/todo.md-33- - Add agent metajson support 0.10.0 [13]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/todo.md-34- - Add agentid to record structs for agent jsonl 0.11.0 [14]
+--
+notes/todo.md-59-[8]: chores-01.md#add-all-optional-fields-seen-test-060
+notes/todo.md-60-[9]: chores-01.md#compact-single-line-output-with-grouped-errors-070
+notes/todo.md-61-[10]: chores-01.md#add-unknown-fields-from-vc-x1-sessions-080
+notes/todo.md:62:[11]: chores-01.md#add-cli-flags-list-errors-recursive-glob-090
+notes/todo.md-63-[12]: chores-01.md#add-support-for-agent-session-files
+notes/todo.md-64-[13]: chores-01.md#add-agent-metajson-support-0100
+notes/todo.md-65-[14]: chores-01.md#add-agentid-to-record-structs-for-agent-jsonl-0110
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/092de687-cd0d-4583-b872-bc2908dff3ba.jsonl-71-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/092de687-cd0d-4583-b872-bc2908dff3ba.jsonl-72-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/092de687-cd0d-4583-b872-bc2908dff3ba.jsonl-73-[Omitted long context line]
+data/092de687-cd0d-4583-b872-bc2908dff3ba.jsonl:74:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/092de687-cd0d-4583-b872-bc2908dff3ba.jsonl-75-[Omitted long context line]
+data/092de687-cd0d-4583-b872-bc2908dff3ba.jsonl:76:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/092de687-cd0d-4583-b872-bc2908dff3ba.jsonl-77-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/092de687-cd0d-4583-b872-bc2908dff3ba.jsonl-78-[Omitted long context line]
+data/092de687-cd0d-4583-b872-bc2908dff3ba.jsonl:79:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/092de687-cd0d-4583-b872-bc2908dff3ba.jsonl-80-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/092de687-cd0d-4583-b872-bc2908dff3ba.jsonl-81-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/092de687-cd0d-4583-b872-bc2908dff3ba.jsonl-82-[Omitted long context line]
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-201-     - `ccs-viewer data/*.jsonl` (regression — 0 errors on local data)
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-202-  9. Update the checklist in this chore section.
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-203-
+notes/chores-01.md:204:## Add CLI flags: list, errors, recursive, glob (0.9.0)
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-205-
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-206-  Rework CLI to default to summary-only output with opt-in detail.
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-207-  Add `glob` crate for program-side glob expansion (portable, no shell
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-219-  ```
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-220-
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-221-  **With `-r`** — positional args are directories (or directory globs)
+notes/chores-01.md:222:  searched recursively. `--glob` filters which files match (default:
+notes/chores-01.md-223-  `*.jsonl`). Multiple `--glob` flags allowed:
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-224-  ```
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-225-  ccs-viewer -r .claude ../vc-x1/.claude
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-230-
+notes/chores-01.md-231-  - `-l` / `--list` — show per-file summary lines (default: off)
+notes/chores-01.md-232-  - `-e` / `--errors` — show grouped error detail section (default: off)
+notes/chores-01.md:233:  - `-r` / `--recursive` — recursive directory search
+notes/chores-01.md:234:  - `--glob <PATTERN>` — file pattern for recursive mode (repeatable,
+notes/chores-01.md-235-    default: `*.jsonl`)
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-236-  - Summary line always shown
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-237-
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-247-  5. Only print error section if `-e`
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-248-  6. Always print summary
+notes/chores-01.md-249-  7. Directory positional args (without `-r`): auto-expand `--glob`
+notes/chores-01.md:250:     patterns inside the directory (non-recursive)
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-251-
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-252-## Add support for agent session files
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-253-
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-267-    as single-object JSON instead of line-by-line JSONL. Counted as
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-268-    "agent-meta" in the summary output.
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-269-  - Default `--glob` patterns now include `*.meta.json` alongside
+notes/chores-01.md:270:    `*.jsonl`, so recursive mode picks them up automatically.
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-271-  - Added `deserialize_agent_meta` test with real test data copied
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-272-    from `.claude/` subagents directory.
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-273-
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-301-## Fix remaining deserialization errors (0.12.0)
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-302-
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-303-  Running `ccs-viewer . -e -r` from `~/data/prgs` hits 5077 files,
+notes/chores-01.md:304:  137k records, and 7371 errors (after removing 3 benchmark logs.jsonl
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-305-  files that accounted for ~60M false positives).
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-306-
+notes/chores-01.md-307-  Error inventory (12 categories, 7371 total):
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-352-
+notes/chores-01.md-353-  First-line sniff test: skip .jsonl files whose first line doesn't
+notes/chores-01.md-354-  start with `{"type":` or `{"parentUuid":`. This eliminates non-CCS
+notes/chores-01.md:355:  files (benchmark logs, line2.jsonl, etc.) without relying on filename
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-356-  patterns. Added `--skipped` / `-s` flag to list skipped files.
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-357-
+notes/chores-01.md-358-  Exit code rework:
+--
+notes/chores-01.md-520-    errors: 0, records: 19, assistant: 2, progress: 5, queue-operation: 1, summary: 1, system: 5, user: 5
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-521- 
+notes/chores-01.md-522-Skipped:
+notes/chores-01.md:523:  tests/rust-cpp-bench-starter/rust_cpp_bench_starter/data/line2.jsonl
+notes/chores-01.md:524:  tests/rust-cpp-bench-starter/rust_cpp_bench_starter/data/line3.jsonl
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-525-
+notes/chores-01.md-526-Zero-len:
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/notes/chores-01.md-527-  3dprinting/box-with-tri-hole/.claude/0f395ec2-1c7d-4a4d-a17f-f96e3bea5a46.jsonl
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl-29-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl-30-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl-31-[Omitted long context line]
+data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl:32:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl-33-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl-34-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl-35-[Omitted long context line]
+--
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl-169-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl-170-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl-171-[Omitted long context line]
+data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl:172:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl-173-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl-174-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl-175-[Omitted long context line]
+data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl:176:[Omitted long matching line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl-177-[Omitted long context line]
+/home/wink/data/prgs/rust/ccs-viewer-by-cc/data/997afb98-c6aa-4f4a-92ac-a841e040414b.jsonl-178-[Omitted long context line]
+
+[Showing results with pagination = limit: 250]
