@@ -24,7 +24,10 @@
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); v=d.get\\(''''error''''\\); print\\(type\\(v\\).__name__\\); print\\(json.dumps\\(v, indent=2\\)[:500]\\)\")",
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); data=d.get\\(''''data'''',{}\\); print\\(''''query:'''', type\\(data.get\\(''''query''''\\)\\).__name__, json.dumps\\(data.get\\(''''query''''\\)\\)[:200]\\)\")",
       "Bash(echo \"exit: $?\")",
-      "Bash(echo $?)"
+      "Bash(echo $?)",
+      "Bash(ls:*)",
+      "Bash(grep -rl 'trackedFileBackups\\\\|toolUseResult\\\\|thinkingMetadata\\\\|contextManagement\\\\|serverToolUse\\\\|normalizedMessages\\\\|compactMetadata\\\\|queue-operation\\\\|progress' /home/wink/data/prgs/rust/ccs-viewer-by-cc/data/*.jsonl)",
+      "Bash(python3:*)"
     ]
   }
 }
