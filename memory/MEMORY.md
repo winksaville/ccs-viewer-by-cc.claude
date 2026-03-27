@@ -3,6 +3,8 @@
 ## User Preferences
 
 - **Commit approval**: Always present the full commit commands to the user for physical review BEFORE executing them. Do not run jj commit / git commit until the user explicitly approves.
+- [Push/finalize approval](feedback_commit_then_ask_push.md) — after commit+bookmarks, stop and ask before pushing or finalizing
+- [Don't rush to commit](feedback_dont_rush_to_commit.md) — iterate with user before committing, especially in new areas
 - **Versioning**: Every plan must start with a version bump per notes/README.md "Versioning during development". Get user approval on single-step vs multi-step approach before starting.
 - **Pre-commit checklist**: Before committing, run: tests, clippy, fmt, install the app, then retest.
 

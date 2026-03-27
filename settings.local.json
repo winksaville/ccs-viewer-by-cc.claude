@@ -27,7 +27,10 @@
       "Bash(echo $?)",
       "Bash(ls:*)",
       "Bash(grep -rl 'trackedFileBackups\\\\|toolUseResult\\\\|thinkingMetadata\\\\|contextManagement\\\\|serverToolUse\\\\|normalizedMessages\\\\|compactMetadata\\\\|queue-operation\\\\|progress' /home/wink/data/prgs/rust/ccs-viewer-by-cc/data/*.jsonl)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Bash(done)"
     ]
   }
 }
