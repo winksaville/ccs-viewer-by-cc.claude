@@ -14,6 +14,10 @@
 - **ochid trailers need updating after squash**: When squashing changes the target commit in .claude, the ochid reference in the app repo must be updated to point at the correct changeID.
 - **Don't modify .claude repo programmatically mid-session**: Session data updates continuously, so bot-initiated changes to .claude can create circular modifications.
 
+## Design Decisions
+
+- [timed module design](project_timed_module.md) — Timed struct + timed! macro: single-param (drop guard) vs dual-param (block) forms, stderr-only
+
 ## Key Files
 
 - notes/README.md — contains versioning workflow, todo format rules
