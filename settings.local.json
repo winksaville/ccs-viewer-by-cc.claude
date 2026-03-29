@@ -30,7 +30,9 @@
       "Bash(python3:*)",
       "Bash(for f:*)",
       "Bash(do echo:*)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(CCS_TIMING=1 ccs-viewer /home/wink/data/prgs/rust/ccs-viewer-by-cc/data/ccs-viewer-tests.jsonl 2>&1)",
+      "Bash(CCS_TIMING=1 ccs-viewer /home/wink/data/prgs/rust/ccs-viewer-by-cc/data/*.jsonl 2>&1)"
     ]
   }
 }
